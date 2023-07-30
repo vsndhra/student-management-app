@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center align-items-center ">
+   <div class="my-5 col-xl-4 col-md-6 col-12">
+      <div class="mb-4">
+         <h1 class="display-4 fs-3 fw-bold text-center mb-2">Login</h1>
+      </div>
+      <form #loginData="ngForm" (ngSubmit)="loginUser(loginData.value)">
+         <div class="row">
+            <div class="col-12">
+               <div class="form-group mt-2">
+                  <label for="email" class="form-label fw-bold">Email</label>
+                  <input type="text" class="form-control" name="email" ngModel placeholder="Email">
+               </div>
+               <div class="form-group mt-2">
+                  <label for="password" class="form-label fw-bold">Passowrd</label>
+                  <input type="password" class="form-control" name="password" ngModel placeholder="Password">
+               </div>
+            </div>
+         </div>
+         <div>
+            <button class="w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Login</button>
+         </div>
+      </form>
+   </div>
+</div>
+<router-outlet></router-outlet>

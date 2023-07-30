@@ -1,0 +1,15 @@
+{
+    "editor.tabSize": 3,
+    "remote.portsAttributes": {
+
+        "443": {
+            "protocol": "https"
+        },
+        "8443": {
+            "protocol": "https"
+        }
+    },
+    "htmlhint.options": {
+        "attr-lowercase": false
+      }
+}

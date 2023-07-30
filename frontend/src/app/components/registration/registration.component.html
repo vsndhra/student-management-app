@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center align-items-center ">
+   <div class="my-5 col-xl-4 col-md-6 col-12">
+      <div class="mb-4">
+         <h1 class="display-4 fs-3 fw-bold text-center mb-2">Register</h1>
+      </div>
+      <!-- <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p> -->
+      <form #userData="ngForm" (ngSubmit)="registerUser(userData.value)">
+         <div class="row">
+            <div class="col-12">
+               <div class="form-group">
+                  <label for="name" class="form-label fw-bold">Name</label>
+                  <input type="text" class="form-control" name="name" ngModel placeholder="Name">
+               </div>
+               <div class="form-group mt-2">
+                  <label for="email" class="form-label fw-bold">Email</label>
+                  <input type="text" class="form-control" name="email" ngModel placeholder="Email">
+               </div>
+               <div class="form-group mt-2">
+                  <label for="password" class="form-label fw-bold">Passowrd</label>
+                  <input type="password" class="form-control" name="password" ngModel placeholder="Password">
+               </div>
+            </div>
+            <div class="col-md-6 col-12">
+               <div class="form-group mt-2 form-check form-check-inline">
+                  <input class="form-check-input form-check-inline" type="radio" name="role" ngModel value="staff">
+                  <label class="form-check-label fw-bold" for="role">Staff</label>
+               </div>
+            </div>
+            <div class="col-md-6 col-12">
+               <div class="form-group mt-2 form-check form-check-inline">
+                  <input class="form-check-input form-check-inline" type="radio" name="role" ngModel value="student">
+                  <label class="form-check-label fw-bold" for="role">Student</label>
+               </div>
+            </div>
+         </div>
+         <div>
+            <button class="w-100 mb-3 btn btn-primary btn-lg mt-2" type="submit">Register</button>
+         </div>
+      </form>
+   </div>
+</div>
+<router-outlet></router-outlet>
