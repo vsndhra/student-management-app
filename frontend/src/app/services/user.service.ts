@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl = 'http://192.168.0.106:5000/api/register'; // Replace with your Flask API URL
+  private apiUrl = 'http://127.0.0.1:5000/api/register'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) { }
 

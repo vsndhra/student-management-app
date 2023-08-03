@@ -3,32 +3,38 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 //importing components
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProfileCreationComponent } from './components/profile-creation/profile-creation.component';
-import { MarkEntryComponent } from './components/mark-entry/mark-entry.component';
-import { MarkDisplayComponent } from './components/mark-display/mark-display.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
+import { MarksComponent } from './components/marks/marks.component';
+import { ResultsComponent } from './components/results/results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    ProfileCreationComponent,
-    MarkEntryComponent,
-    MarkDisplayComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidemenuComponent,
+    ProfileComponent,
+    HomeComponent,
+    MarksComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    RouterModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
