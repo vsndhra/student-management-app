@@ -3,10 +3,11 @@ from mongoengine import connect
 from flask_cors import CORS 
 from ORM.user import User
 from flask_bcrypt import Bcrypt
-from flask_jwt import JWT, jwt_required, current_identity
+import jwt
 
 app = Flask(__name__)
 CORS(app)
+app.config['SECRET_KEY'] = 'yplshtjaksywqosndhfyrksmalpsdjuf'
 
 connect(db="student-management", host="mongodb://localhost:27017")
 bcrypt = Bcrypt(app)
@@ -52,9 +53,13 @@ def login():
     if not user:
         return jsonify({'error': 'User not found.'}), 404
     
-    # Check if the provided password matches the hashed password in the database
     if bcrypt.check_password_hash(user.password, data['password']):
-        return jsonify({'message': 'Login successful.'}), 200
+
+        token = jwt.encode({'name': user.name, 'email': user.email, 'role': user.role}, app.config['SECRET_KEY'], algorithm='HS256')
+        token_str = token.decode('utf-8')
+
+        return jsonify({'message': 'Login successful.', 'token': token_str}), 200
+    
     else:
         return jsonify({'error': 'Invalid Login credentials.'}), 401
 
@@ -64,8 +69,6 @@ def login():
 #@requires_auth('student')  # Only students can create their profiles
 def create_profile():
     data = request.get_json()
-    # Validate data and save profile to the database
-    # You can use the StudentProfile or StaffProfile models from the models.py file to save profile details.
     # Return appropriate response or error messages.
     return jsonify({'message': 'Profile created successfully.'}), 201
 

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
      <div class="container-fluid">
-          <a class="navbar-brand fs-1 fw-bolder" href="#">Student Management</a>
+          <span class="navbar-brand fs-1 fw-bolder p-2">Student Management</span>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
@@ -11,12 +11,24 @@
                          <!-- <a routerLink=" " routerLinkActive="active" class="nav-link active">Home</a> -->
                     </li>
                </ul>
-               <span class="navbar-text text-light fw-bold mx-2">
-                    <a routerLink="/registration" routerLinkActive="active">Register</a>
-               </span>
-               <span class="navbar-text text-light fw-bold">
-                    <a routerLink="/login" routerLinkActive="active">Login</a>
-               </span>
+               <div class="dropdown fs-5 fw-bold mx-3" *ngIf="isLoggedIn">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Hi! {{ userName }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                    </ul>
+               </div>
+               <div class="p-3" *ngIf="!isLoggedIn">
+                    <span class="navbar-text text-light fs-5 fw-bold mx-3">
+                         <a routerLink="/registration" routerLinkActive="active"> Register</a>
+                    </span>
+                    <span class="navbar-text text-light fs-5 fw-bold">
+                         <a routerLink="/login" routerLinkActive="active">Login</a>
+                    </span>
+               </div>
+               
           </div>
      </div>
 </nav>

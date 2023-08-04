@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode'; // Import the jwt-decode library
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  successMessage: string = ''; // Variable to store the success message
   constructor(
     private authenticationService: AuthenticationService, 
     private router: Router
@@ -21,7 +21,19 @@ export class LoginComponent {
     this.authenticationService.loginUser(loginData)
     .subscribe(
       response => {
-        console.log('User logged in successgully', response);
+
+        // Storing the token to session
+        sessionStorage.setItem('token', response.token);
+
+        //retrieving the user details from payload
+        const details: any = jwtDecode(response.token);
+        const isLoggedIn = !!sessionStorage.getItem('token');
+        
+        console.log('User logged in successgully', response.token, details, isLoggedIn);
+
+        // Set the login status and user's name in the UserDataService
+        this.authenticationService.setUserData(isLoggedIn, details.name);
+
         this.router.navigate(['/dashboard']);
       },
       error => {

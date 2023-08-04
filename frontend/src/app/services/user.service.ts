@@ -15,5 +15,7 @@ export class UserService {
     // Send the POST request to the Flask API
     return this.http.post<any>(this.apiUrl, data);
   }
+
+
   
 }
