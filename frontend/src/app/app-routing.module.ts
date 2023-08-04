@@ -6,9 +6,10 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirect to the login page if the URL is empty
+  { path: '', component: HomepageComponent },
   { path: 'login', title: 'Login',component: LoginComponent },
   { path: 'registration', title: 'Registeration',component: RegistrationComponent },
   { path: 'dashboard', title: 'Dashboard',component: DashboardComponent },

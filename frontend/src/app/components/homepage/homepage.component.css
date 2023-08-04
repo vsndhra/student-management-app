@@ -1,0 +1,21 @@
+.animate{
+   display: inline-block;
+}
+.text{
+   width: 100%;
+   white-space: nowrap;
+   overflow: hidden;
+   border-right: 5px solid;
+   animation: 
+         typing 3s steps(28),
+         cursor .4s step-end infinite alternate;
+}
+
+/* cursor blinking */
+@keyframes cursor {
+   50% { border-color: transparent}
+} 
+
+@keyframes typing {
+   from { width: 0}
+}
