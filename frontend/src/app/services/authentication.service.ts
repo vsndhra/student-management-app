@@ -8,12 +8,12 @@ import { Subject } from 'rxjs';
 })
 export class AuthenticationService {
 
-  isLoggedIn: boolean = false;
-  userName: string = '';
+  public isLoggedIn: boolean = false;
+  public userName: string = '';
   userDataChanged = new Subject<{ isLoggedIn: boolean; userName: string }>();
 
 
-  private apiUrl = 'http://127.0.0.1:5000/api/login'; // Replace with your Flask API URL
+  private apiUrl = 'http://192.168.0.106:5000/api/login'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) { }
 

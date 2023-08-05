@@ -2,7 +2,7 @@
     <div class="p-0 side-menu">
         <app-sidemenu (contentSelected)="onContentSelected($event)"></app-sidemenu>
     </div>
-    <div class="p-2 main">
+    <div class="main w-100">
         <ng-container *ngIf="selectedContent === 'home'">
             <app-home></app-home>
         </ng-container>

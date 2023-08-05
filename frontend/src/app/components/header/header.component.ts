@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
+  
 })
 export class HeaderComponent {
 
@@ -18,12 +19,13 @@ export class HeaderComponent {
     private autheticationService: AuthenticationService,
     private router: Router
     ) {
-    /// Subscribe to changes in the login status and user details
+    // Subscribe to changes in the login status and user details
     this.subscription = this.autheticationService.userDataChanged.subscribe((data) => {
       this.isLoggedIn = data.isLoggedIn;
       this.userName = data.userName;
     });
-    console.log("header component", this.userName)
+
+    console.log(this.userName);
   }
 
   ngOnDestroy() {
