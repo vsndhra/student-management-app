@@ -31,26 +31,11 @@ def register_user():
 
     data = request.get_json()
 
-    # if User.objects(email=data['email']).first():
-    #     return jsonify({'error': 'User with this email already exists.'}), 409
-    # else:
-    #     user = User()
-    #     user.name = data['name']
-    #     user.email = data['email']
-    #     user.password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    #     user.role = data['role']
-    #     try:
-    #         user.save()
-    #         return jsonify({'success': 'User registered successfully.'}), 201
-    #     except Exception as e:
-    #         return jsonify({'error': str(e)}), 500
-
     name = data['name']
     email = data['email']
     role = data['role']
     password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
 
-    # MySQL version
     cursor = mysql.connection.cursor()
     cursor.execute("INSERT INTO users (name, email, role, password) VALUES (%s, %s, %s, %s)", (name, email, role, password))
     try:
@@ -67,27 +52,10 @@ def register_user():
 def login():
 
     data = request.get_json()
-    
-    # if not data.get('email') or not data.get('password'):
-    #     return jsonify({'error': 'Please provide email and password.'}), 400
 
-    # # Check if the user with the given email exists in the database
-    # user = User.objects(email=data['email']).first()
-    # if not user:
-    #     return jsonify({'error': 'User not found.'}), 404
-    
-    # if bcrypt.check_password_hash(user.password, data['password']):
-    #     token = jwt.encode({'name': user.name, 'email': user.email, 'role': user.role}, app.config['SECRET_KEY'], algorithm='HS256')
-    #     token_str = token.decode('utf-8')
-    #     return jsonify({'message': 'Login successful.', 'token': token_str}), 200
-    # else:
-    #     return jsonify({'error': 'Invalid Login credentials.'}), 401
-
-    # MySQL Version
     email = data['email']
     password = data['password']
 
-    # MySQL version
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT id, name, email, role, password FROM users WHERE email = %s", (email,))
     user = cursor.fetchone()
@@ -100,6 +68,7 @@ def login():
             token_payload = {
                 'name': name,
                 'role': role,
+                'email': email
             }
             token = jwt.encode(token_payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
@@ -110,11 +79,73 @@ def login():
         return jsonify({'error': 'User not found'}), 404
 
 # Route for profile creation
-@app.route('/profile', methods=['POST'])
-def create_profile():
+@app.route('/api/update', methods=['POST'])
+def updateUser():
     data = request.get_json()
-    # Return appropriate response or error messages.
-    return jsonify({'message': 'Profile created successfully.'}), 201
+    if(data['role'] == 'student'):
+        # Retrieve values from data into the variables
+        name = data['name']
+        rollno = data['rollno']
+        dob = data['dob']
+        email = data['email']
+        phone = data['phone']
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM students WHERE email = %s", (email,))
+        result = cursor.fetchone()[0]
+
+        if result > 0:
+            # Email exists, update the data based on the role
+            cursor.execute("UPDATE students SET name = %s, rollno = %s, dob = %s, phone = %s WHERE email = %s",
+                                   (name, rollno, dob, phone, email))
+            try:
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({'success': 'User updated successfully.'}), 201
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        else:
+            # Email does not exist, insert the data based on the role
+            cursor.execute("INSERT INTO students (name, rollno, dob, phone, email) VALUES (%s, %s, %s, %s, %s)",
+                                   (name, rollno, dob, phone, email))
+            try:
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({'success': 'User updated successfully.'}), 201
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+    elif(data['role'] == 'staff'):
+        # Retrieve values from data into the variables
+        name = data['name']
+        staffid = data['staffid']
+        phone = data['phone']
+        email = data['email']
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM teachers WHERE email = %s", (email,))
+        result = cursor.fetchone()[0]
+        if result > 0:
+            # Email exists, update the data based on the role
+            cursor.execute("UPDATE teachers SET name = %s, staffid = %s, phone = %s WHERE email = %s",
+                                   (name, staffid, phone, email))
+            try:
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({'success': 'User updated successfully.'}), 201
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        else:
+            # Email does not exist, insert the data based on the role
+            cursor.execute("INSERT INTO student (name, staffid, email, phone) VALUES (%s, %s, %s, %s)",
+                                   (name, staffid, email, phone))
+            try:
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({'success': 'User updated successfully.'}), 201
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
 
 # Route for marks entry 
 @app.route('/marks', methods=['POST'])

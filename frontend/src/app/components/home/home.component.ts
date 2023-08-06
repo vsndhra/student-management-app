@@ -24,11 +24,4 @@ export class HomeComponent implements OnInit {
     this.userName = this.autheticationService.getUserName();
   }
 
-  logout() {
-    // Clear user data on logout
-    this.autheticationService.clearUserData();
-    this.router.navigate(['/']);
-    
-  }
-
 }

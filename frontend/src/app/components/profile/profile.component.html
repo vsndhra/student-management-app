@@ -4,15 +4,14 @@
          <h4 class="text">Profile</h4>
       </div>
    </div>
-   <div class="container-fluid d-flex justify-content-center align-items-center p-3">
-      <!-- <form #userData="ngForm" (ngSubmit)="registerUser(userData.value)"> -->
-      <div class="my-5 col-xl-4 col-md-6 col-12">
-         <form>
+   <div class="container-fluid d-flex justify-content-center align-items-center">
+      <div class="my-5 col-xl-4 col-md-6 col-12" *ngIf="role === 'student'">
+         <form #updateData="ngForm" (ngSubmit)="updateUser(updateData.value, 'student')"> 
             <div class="row">
                <div class="col-12">
                   <div class="form-group">
-                     <label for="name" class="form-label fw-bold">Name</label>
-                     <input type="text" class="form-control" name="name" ngModel placeholder="Name" readonly>
+                     <label for="name" class="form-label fw-bold">Name </label>
+                     <input type="text" class="form-control" name="name" ngModel  [(ngModel)]="userName" readonly>
                   </div>
                   <div class="form-group mt-2">
                      <label for="rollno" class="form-label fw-bold">Roll Number</label>
@@ -24,13 +23,45 @@
                   </div>
                   <div class="form-group mt-2">
                      <label for="email" class="form-label fw-bold">Email</label>
-                     <input type="text" class="form-control" name="email" ngModel placeholder="Email" readonly>
+                     <input type="text" class="form-control" name="email" ngModel  [(ngModel)]="email" readonly>
+                  </div>
+                  <div class="form-group mt-2">
+                     <label for="phone" class="form-label fw-bold">Phone Number</label>
+                     <input type="text" class="form-control" name="phone" ngModel placeholder="Phone Number">
                   </div>
                </div>
             </div>
-         <div>
-            <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Update Profile</button>
-         </div>
-      </form>
+            <div>
+               <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Update Profile</button>
+            </div>
+         </form>
+      </div>
+      <div class="my-5 col-xl-4 col-md-6 col-12" *ngIf="role === 'staff'">
+         <form #updateData="ngForm" (ngSubmit)="updateUser(updateData.value, 'staff')"> 
+            <div class="row">
+               <div class="col-12">
+                  <div class="form-group">
+                     <label for="name" class="form-label fw-bold">Name </label>
+                     <input type="text" class="form-control" name="name" ngModel  [(ngModel)]="userName" readonly>
+                  </div>
+                  <div class="form-group mt-2">
+                     <label for="rollno" class="form-label fw-bold">Staff ID</label>
+                     <input type="text" class="form-control" name="staffid" ngModel placeholder="Staff ID">
+                  </div>
+                  <div class="form-group mt-2">
+                     <label for="email" class="form-label fw-bold">Email</label>
+                     <input type="text" class="form-control" name="email" ngModel  [(ngModel)]="email" readonly>
+                  </div>
+                  <div class="form-group mt-2">
+                     <label for="phone" class="form-label fw-bold">Phone number</label>
+                     <input type="text" class="form-control" name="phone" ngModel placeholder="Phone number" >
+                  </div>
+               </div>
+            </div>
+            <div>
+               <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Update Profile</button>
+            </div>
+         </form>
+      </div>
    </div>
 </div>   

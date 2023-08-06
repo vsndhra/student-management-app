@@ -28,7 +28,7 @@ export class LoginComponent {
         const isLoggedIn = !!sessionStorage.getItem('token');
     
         console.log('User logged in successgully', response.token, details, isLoggedIn);
-        this.authenticationService.setUserData(isLoggedIn, details.name);
+        this.authenticationService.setUserData(isLoggedIn, details.name, details.email, details.role);
         this.router.navigate(['/dashboard']);
       },
       error => {
