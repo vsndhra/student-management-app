@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode'; // Import the jwt-decode library
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +17,7 @@ export class LoginComponent {
 
   loginUser(loginData: any){
 
-    console.warn(loginData)
-    this.authenticationService.loginUser(loginData)
-    .subscribe(
+    this.authenticationService.loginUser(loginData).subscribe(
       response => {
 
         // Storing the token to session
@@ -28,12 +26,9 @@ export class LoginComponent {
         //retrieving the user details from payload
         const details: any = jwtDecode(response.token);
         const isLoggedIn = !!sessionStorage.getItem('token');
-        
+    
         console.log('User logged in successgully', response.token, details, isLoggedIn);
-
-        // Set the login status and user's name in the UserDataService
         this.authenticationService.setUserData(isLoggedIn, details.name);
-
         this.router.navigate(['/dashboard']);
       },
       error => {

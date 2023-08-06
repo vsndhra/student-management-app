@@ -8,10 +8,10 @@ import { Subject } from 'rxjs';
 })
 export class AuthenticationService {
 
-  public isLoggedIn: boolean = false;
-  public userName: string = '';
-  userDataChanged = new Subject<{ isLoggedIn: boolean; userName: string }>();
-
+  userData = new Subject<{ isLoggedIn: boolean; userName: string }>();
+  
+  private isLoggedIn: boolean = false;
+  private userName: string = '';
 
   private apiUrl = 'http://192.168.0.106:5000/api/login'; // Replace with your Flask API URL
 
@@ -21,21 +21,24 @@ export class AuthenticationService {
     return this.http.post<any>(this.apiUrl, data);
   }
 
-  setUserData(isLoggedIn: boolean, userName: string) {
+  setUserData(isLoggedIn: boolean, name: string): void {
     this.isLoggedIn = isLoggedIn;
-    this.userName = userName;
+    this.userName = name;
 
-    // Emit changes using the Subject
-    this.userDataChanged.next({ isLoggedIn: this.isLoggedIn, userName: this.userName });
-  
+    // Emit changes using the Subject 
+    this.userData.next({ isLoggedIn: this.isLoggedIn, userName: this.userName });
   }
 
-  clearUserData() {
+  getIsLoggedIn(): boolean {
+    return this.isLoggedIn;
+  }
+
+  getUserName(): string {
+    return this.userName;
+  }
+  clearUserData():any{
     this.isLoggedIn = false;
     this.userName = '';
-
-    // Emit changes using the Subject
-    this.userDataChanged.next({ isLoggedIn: this.isLoggedIn, userName: this.userName });
-    
+    this.userData.next({ isLoggedIn: this.isLoggedIn, userName: this.userName });
   }
 }

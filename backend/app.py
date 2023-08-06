@@ -109,7 +109,6 @@ def login():
     else:
         return jsonify({'error': 'User not found'}), 404
 
-
 # Route for profile creation
 @app.route('/profile', methods=['POST'])
 def create_profile():
