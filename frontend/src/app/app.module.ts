@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -16,7 +15,15 @@ import { HomeComponent } from './components/home/home.component';
 import { MarksComponent } from './components/marks/marks.component';
 import { ResultsComponent } from './components/results/results.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-
+import { AssignmentsComponent } from './components/assignments/assignments.component';
+import { SubmissionsComponent } from './components/submissions/submissions.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,16 +36,24 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     HomeComponent,
     MarksComponent,
     ResultsComponent,
-    HomepageComponent
+    HomepageComponent,
+    AssignmentsComponent,
+    SubmissionsComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule, 
+    RouterModule,
+    BrowserAnimationsModule, 
+    MatButtonModule, 
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, SubmissionsComponent]
 })
 export class AppModule { }

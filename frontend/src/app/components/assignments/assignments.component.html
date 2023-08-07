@@ -1,0 +1,98 @@
+<div class="container-fluid p-3">
+   <div class="top-container p-2">
+      <div class="row border-bottom border-2 border-secondary pb-2">
+         <div class="col">
+            <h4 class="text">Assignments</h4>
+         </div>
+         <div class=" col d-flex justify-content-end">
+            <button type="button" class="button btn btn-primary text-dark" *ngIf="role === 'staff'" (click)="onContentSelected('addAssignment')">Add Assignment</button>
+         </div> 
+      </div>
+   </div>
+   <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'listAssignment'">
+      <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">S.No</th>
+             <th scope="col">Assignment Title</th>
+             <th scope="col">Due</th>
+             <th scope="col">Marks</th>
+             <th scope="col">Status</th>
+             <th scope="col"> Actions</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let assignment of assignments; let i = index">
+            <th scope="row"> {{ i + 1 }} </th>
+            <td> {{ assignment.title }} </td>
+            <td> {{ assignment.due_date }} | {{ assignment.time }}</td>
+            <td> {{ assignment.marks }} </td>
+            <td>
+               <p *ngIf="assignment.status" >
+                  <i class="fa fa-check active mx-2" aria-hidden="true"></i> Active
+               </p>
+               <p *ngIf="!assignment.status" >
+                  <i class="fa fa-times inactive mx-2" aria-hidden="true"></i> Inactive
+               </p>
+            </td>
+            <td>
+               <div *ngIf="role === 'staff'">
+                  <i class="fa fa-trash delete" aria-hidden="true"></i>
+               </div>
+               <div *ngIf="role === 'student'">
+                  <button type="button" class="button btn btn-primary text-dark" (click)="submitAssignment()">Turn in</button> 
+               </div>
+            </td>
+           </tr>
+         </tbody>
+       </table>
+   </div>
+   <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'addAssignment'">
+      <div class="my-5 col-xl-4 col-md-6 col-12">
+         <form #assignmentData="ngForm" (ngSubmit)="addAssignment(assignmentData.value)"> 
+            <div class="row">
+               <div class="col-12">
+                  <div class="form-group">
+                     <label for="title" class="form-label fw-bold">Assignment Title </label>
+                     <input type="text" class="form-control" name="title" ngModel placeholder="Assignment Title">
+                  </div>
+                  <div class="form-group mt-2">
+                     <label for="description" class="form-label fw-bold">Description</label>
+                     <textarea class="form-control" name="description" ngModel placeholder="Description"></textarea>
+                  </div>
+               </div>
+               <div class="col-md-6 col-12">
+                  <div class="form-group mt-2">
+                     <label for="date" class="form-label fw-bold">Due Date</label>
+                     <input type="date" class="form-control" name="date" ngModel placeholder="Due Date">
+                  </div>
+               </div>
+               <div class="col-md-6 col-12">
+                  <div class="form-group mt-2">
+                     <label for="time" class="form-label fw-bold">Time</label>
+                     <input type="time" class="form-control" name="time" ngModel placeholder="Due Time">
+                  </div>
+               </div>
+               <div class="col-md-6 col-12">
+                  <div class="form-group mt-2">
+                     <label for="marks" class="form-label fw-bold">Marks Alloted</label>
+                     <input type="text" class="form-control" name="marks" ngModel placeholder="Marks Alloted">
+                  </div>
+               </div>
+               <div class="col-md-6 col-12">
+                  <div class="form-group mt-2">
+                     <label for="toggleInput" class="form-label fw-bold">Status</label><br>
+                     <label class="switch">
+                        <input type="checkbox" name="status" ngModel value="active" checked>
+                        <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Add Assignment</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>   

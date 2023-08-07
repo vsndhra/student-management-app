@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
 from mongoengine import connect
 from flask_cors import CORS 
-from ORM.user import User
+from ORM.assignment import Assignment
 from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL 
 import jwt
-
+from datetime import datetime, time
 
 app = Flask(__name__)
 CORS(app)
@@ -72,7 +72,7 @@ def login():
             }
             token = jwt.encode(token_payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
-            return jsonify({'message': 'Login successful.','token': token}), 200
+            return jsonify({'Success': 'Login successful.','token': token}), 200
         else:
             return jsonify({'error': 'Invalid credentials'}), 401
     else:
@@ -81,8 +81,11 @@ def login():
 # Route for profile creation
 @app.route('/api/update', methods=['POST'])
 def updateUser():
+
     data = request.get_json()
+    
     if(data['role'] == 'student'):
+        
         # Retrieve values from data into the variables
         name = data['name']
         rollno = data['rollno']
@@ -95,6 +98,7 @@ def updateUser():
         result = cursor.fetchone()[0]
 
         if result > 0:
+            
             # Email exists, update the data based on the role
             cursor.execute("UPDATE students SET name = %s, rollno = %s, dob = %s, phone = %s WHERE email = %s",
                                    (name, rollno, dob, phone, email))
@@ -106,6 +110,7 @@ def updateUser():
                 return jsonify({'error': str(e)}), 500
 
         else:
+            
             # Email does not exist, insert the data based on the role
             cursor.execute("INSERT INTO students (name, rollno, dob, phone, email) VALUES (%s, %s, %s, %s, %s)",
                                    (name, rollno, dob, phone, email))
@@ -115,7 +120,9 @@ def updateUser():
                 return jsonify({'success': 'User updated successfully.'}), 201
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
+    
     elif(data['role'] == 'staff'):
+    
         # Retrieve values from data into the variables
         name = data['name']
         staffid = data['staffid']
@@ -126,6 +133,7 @@ def updateUser():
         cursor.execute("SELECT COUNT(*) FROM teachers WHERE email = %s", (email,))
         result = cursor.fetchone()[0]
         if result > 0:
+            
             # Email exists, update the data based on the role
             cursor.execute("UPDATE teachers SET name = %s, staffid = %s, phone = %s WHERE email = %s",
                                    (name, staffid, phone, email))
@@ -137,6 +145,7 @@ def updateUser():
                 return jsonify({'error': str(e)}), 500
 
         else:
+            
             # Email does not exist, insert the data based on the role
             cursor.execute("INSERT INTO student (name, staffid, email, phone) VALUES (%s, %s, %s, %s)",
                                    (name, staffid, email, phone))
@@ -146,6 +155,53 @@ def updateUser():
                 return jsonify({'success': 'User updated successfully.'}), 201
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
+
+# Route for adding assignments
+@app.route('/api/addAssignment', methods=['POST'])
+def addAssignment():
+
+    assignment = Assignment()
+    data = request.get_json()
+
+    assignment.title = data['title']
+    assignment.description = data['description']
+    assignment.date = str(datetime.strptime(data['date'], '%Y-%m-%d').date())
+    assignment.time = str(datetime.strptime(data['time'], '%H:%M').time())
+    assignment.marks = data['marks']
+    assignment.status = data['status']
+
+    try:
+        assignment.save()
+        return jsonify({'success': 'Assignment added successfully.'}), 201
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Route for getting assignments
+@app.route('/api/getAssignment', methods=['GET']) 
+def getAssignment():
+
+    try:
+        assignments = Assignment.objects()  # Retrieve all assignments from the collection
+        assignment_list = []
+
+        for assignment in assignments:
+            assignment_data = {
+                'title': assignment.title,
+                'description': assignment.description,
+                'due_date': assignment.date,
+                'time': assignment.time,
+                'marks': assignment.marks,
+                'status': assignment.status
+            }
+            assignment_list.append(assignment_data)
+
+        # return jsonify({'Success': 'successful.','assignments': assignment_list}), 200
+        return jsonify({'assignments': assignment_list }), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 
 # Route for marks entry 
 @app.route('/marks', methods=['POST'])
