@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { SubmissionsComponent } from '../submissions/submissions.component';
 
 @Component({
   selector: 'app-assignments',
@@ -20,7 +17,6 @@ export class AssignmentsComponent {
   constructor(
     private autheticationService: AuthenticationService,
     private userService: UserService,
-    private matDialog: MatDialog,
     ) { }
     
   ngOnInit(): void {
@@ -59,7 +55,6 @@ export class AssignmentsComponent {
       )
   }
   submitAssignment(): void{
-    const dialogRef = this.matDialog.open(SubmissionsComponent);
   }
 
 }
