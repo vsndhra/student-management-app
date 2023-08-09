@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-submissions',
@@ -7,4 +11,39 @@ import { Component } from '@angular/core';
 })
 export class SubmissionsComponent {
 
+  isLoggedIn: boolean = false;
+  userName: string = '';
+  role: string = '';
+  submissions: any[] = []; // Initialize the submissions array
+
+  constructor(
+    private autheticationService: AuthenticationService,
+    private userService: UserService,
+    private router: Router
+    ) { }
+    
+  ngOnInit(): void {
+    this.isLoggedIn = this.autheticationService.getIsLoggedIn();
+    this.userName = this.autheticationService.getUserName();
+    this.role = this.autheticationService.getRole();
+    this.getSubmissions();
+  }
+
+  getSubmissions(){
+    this.userService.getSubmissions()
+      .subscribe(
+          response => {
+            console.log(response);
+            this.submissions = response.assignments; 
+            console.log(this.submissions)
+          },
+          error => {
+            console.error('Error getting submissions:', error);
+          }
+      )
+  }
+
+  gradeAssignment(){
+
+  }
 }

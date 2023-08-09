@@ -9,8 +9,10 @@ export class UserService {
 
   private registerAPI = 'http://192.168.0.106:5000/api/register'; // Replace with your Flask API URL for registration
   private updateAPI = 'http://192.168.0.106:5000/api/update'; // Replace with your Flask API URL for updation
-  private addAssignmentAPI = 'http://192.168.0.106:5000/api/addAssignment'; // Replace with your Flask API URL for updation
-  private getAssignmentAPI = 'http://192.168.0.106:5000/api/getAssignment'; // Replace with your Flask API URL for updation
+  private addAssignmentAPI = 'http://192.168.0.106:5000/api/addAssignment'; // Replace with your Flask API URL for adding assignmen
+  private getAssignmentAPI = 'http://192.168.0.106:5000/api/getAssignment'; // Replace with your Flask API URL for getting assignmrnt
+  private submitAssignmentAPI = 'http://192.168.0.106:5000/api/submitAssignment'; // Replace with your Flask API URL for getting assignmrnt
+  private getSubmissionAPI = 'http://192.168.0.106:5000/api/getSubmission'; // Replace with your Flask API URL for getting assignmrnt
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +33,14 @@ export class UserService {
 
   getAssignment(): Observable<any> {
     return this.http.get<any>(this.getAssignmentAPI);
+  }
+
+  submitAssignment(data: any): Observable<any> {
+    return this.http.post<any>(this.submitAssignmentAPI, data);
+  }
+
+  getSubmissions(): Observable<any> {
+    return this.http.get<any>(this.getSubmissionAPI);
   }
   
 }

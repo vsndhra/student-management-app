@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { SubmissionsComponent } from '../submissions/submissions.component';
 
 @Component({
   selector: 'app-assignments',
@@ -20,13 +17,13 @@ export class AssignmentsComponent {
   constructor(
     private autheticationService: AuthenticationService,
     private userService: UserService,
-    private matDialog: MatDialog,
     ) { }
     
   ngOnInit(): void {
     this.isLoggedIn = this.autheticationService.getIsLoggedIn();
     this.role = this.autheticationService.getRole();
     this.getAssignments();
+    
   }
 
   onContentSelected(contentId: string) {
@@ -52,14 +49,29 @@ export class AssignmentsComponent {
           response => {
             console.log(response);
             this.assignments = response.assignments; 
+            console.log(this.assignments)
           },
           error => {
             console.error('Error getting assignment:', error);
           }
       )
   }
-  submitAssignment(): void{
-    const dialogRef = this.matDialog.open(SubmissionsComponent);
+  
+  showSubmission(): void{
+    this.selectedContent = "showSubmission";
+  }
+
+  submitAssignment(submissionData: any) {
+    this.userService.submitAssignment(submissionData)
+    .subscribe(
+        response => {
+          console.log('Assignment submitted successfully: ', response);
+          this.selectedContent = "showSubmission";
+        },
+        error => {
+          console.error('Error adding assignment:', error);
+        }
+    );
   }
 
 }

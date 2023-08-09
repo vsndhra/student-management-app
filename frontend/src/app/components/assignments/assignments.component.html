@@ -40,7 +40,7 @@
                   <i class="fa fa-trash delete" aria-hidden="true"></i>
                </div>
                <div *ngIf="role === 'student'">
-                  <button type="button" class="button btn btn-primary text-dark" (click)="submitAssignment()">Turn in</button> 
+                  <button type="button" class="button btn btn-primary text-dark" (click)="showSubmission()">Turn in</button> 
                </div>
             </td>
            </tr>
@@ -88,6 +88,35 @@
                      </label>
                   </div>
                </div>
+            </div>
+            <div>
+               <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Add Assignment</button>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'showSubmission'">
+      <div class="my-5 col-xl-4 col-md-6 col-12">
+         <form #submissionData="ngForm" (ngSubmit)="submitAssignment(submissionData.value)">
+            <div class="row">
+               <div class="col-12">
+                  <div class="form-group">
+                     <label for="name" class="form-label fw-bold">Name</label>
+                     <input type="text" class="form-control" name="name" ngModel placeholder="Name">
+                  </div>
+                  <div class="form-group">
+                     <label for="rollno" class="form-label fw-bold mt-2">Roll Number</label>
+                     <input type="text" class="form-control" name="rollno" ngModel placeholder="Roll Number">
+                  </div>
+                  <div class="form-group">
+                     <label for="title" class="form-label fw-bold mt-2">Title</label>
+                     <input type="text" class="form-control" name="title" ngModel placeholder="Title">
+                  </div>
+                  <div class="form-group">
+                     <label for="file" class="form-label fw-bold mt-2">Upload File</label>
+                     <input type="file" class="form-control" name="file" ngModel >
+                  </div>
+               </div>         
             </div>
             <div>
                <button class="button text-dark w-100 mb-3 btn btn-primary btn-lg mt-3" type="submit">Add Assignment</button>

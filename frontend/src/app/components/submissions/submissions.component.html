@@ -1,1 +1,42 @@
-<p>submissions works!</p>
+<div class="container-fluid p-3">
+   <div class="top-container p-2">
+      <div class="row border-bottom border-2 border-secondary pb-2">
+         <div class="col">
+            <h4 class="text">Submissions</h4>
+         </div>
+      </div>
+   </div>
+   <div class="container-fluid d-flex justify-content-center align-items-center">
+      <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">S.No</th>
+             <th scope="col">Name</th>
+             <th scope="col">Roll Number</th>
+             <th scope="col">Title</th>
+             <th scope="col">Date</th>
+             <th scope="col"> File</th>
+             <th scope="col"> Action</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let submission of submissions; let i = index">
+            <th scope="row"> {{ i + 1 }} </th>
+            <td> {{ submission.name }} </td>
+            <td> {{ submission.rollno }} </td>
+            <td> {{ submission.title }} </td>
+            <td> {{ submission.date }} |  {{ submission.time }}  </td>
+            <td> {{ submission.file }} </td>
+            <td>
+               <div *ngIf="role === 'student'">
+                  <i class="fa fa-trash delete" aria-hidden="true"></i>
+               </div>
+               <div *ngIf="role === 'staff'">
+                  <button type="button" class="button btn btn-primary text-dark" (click)="gradeAssignment()">Grade</button> 
+               </div>
+            </td>
+           </tr>
+         </tbody>
+       </table>
+   </div>
+</div>

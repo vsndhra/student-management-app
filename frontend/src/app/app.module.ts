@@ -16,14 +16,9 @@ import { MarksComponent } from './components/marks/marks.component';
 import { ResultsComponent } from './components/results/results.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AssignmentsComponent } from './components/assignments/assignments.component';
-import { SubmissionsComponent } from './components/submissions/submissions.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { SubmissionsComponent } from './components/submissions/submissions.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,15 +40,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
-    BrowserAnimationsModule, 
-    MatButtonModule, 
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
-    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent, SubmissionsComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
