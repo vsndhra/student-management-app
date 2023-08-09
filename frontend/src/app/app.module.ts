@@ -16,8 +16,14 @@ import { MarksComponent } from './components/marks/marks.component';
 import { ResultsComponent } from './components/results/results.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AssignmentsComponent } from './components/assignments/assignments.component';
+<<<<<<< HEAD
 import { FormsModule } from '@angular/forms';
 import { SubmissionsComponent } from './components/submissions/submissions.component';
+=======
+import { SubmissionsComponent } from './components/submissions/submissions.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+>>>>>>> origin/master
 
 @NgModule({
   declarations: [
@@ -41,6 +47,10 @@ import { SubmissionsComponent } from './components/submissions/submissions.compo
     HttpClientModule,
     RouterModule,
     FormsModule,
+<<<<<<< HEAD
+=======
+    BrowserAnimationsModule,
+>>>>>>> origin/master
   ],
   providers: [],
   bootstrap: [AppComponent]

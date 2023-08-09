@@ -2,9 +2,11 @@ from flask import Flask, request, jsonify
 from mongoengine import connect
 from flask_cors import CORS 
 from ORM.assignment import Assignment
+from ORM.submission import Submission
 from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL 
 import jwt
+import os
 from datetime import datetime, time
 
 app = Flask(__name__)
@@ -13,8 +15,10 @@ CORS(app)
 app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL_DB'] = "student-management-app"
+app.config['MYSQL_DB'] = "student-management"
 app.config['SECRET_KEY'] = 'yplshtjaksywqosndhfyrksmalpsdjuf'
+UPLOAD_FOLDER = 'uploads'  # Specify the folder where files will be saved
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Mongodb connection
 connect(db="student-management", host="mongodb://localhost:27017")
@@ -201,7 +205,54 @@ def getAssignment():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# Route for assignment submissions
+@app.route('/api/submitAssignment', methods=['POST'])
+def submitAssignment():
+
+    submission = Submission()
+    data = request.get_json()
+    current = datetime.now()
+
+    uploaded = data['file']
+    filename = os.path.join(app.config['UPLOAD_FOLDER'], uploaded)
+
+    submission.name = data['name']
+    submission.rollno = data['rollno']
+    submission.title = data['title']
+    submission.date = current.strftime("%Y-%m-%d")
+    submission.time = current.strftime("%H:%M:%S.%f")
+    submission.file = filename
+    try:
+        submission.save()
+        return jsonify({'success': 'Assignment submitted successfully.'}), 201
     
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/getSubmission', methods=['GET'])
+def getSubmission():
+
+    try:
+        submissions = Submission.objects()  # Retrieve all assignments from the collection
+        submission_list = []
+
+        for submission in submissions:
+            submission_data = {
+                'name': submission.name,
+                'rollno': submission.rollno,
+                'title': submission.title,
+                'date': submission.date,
+                'time': submission.time,
+                'file': submission.file
+            }
+            submission_list.append(submission_data)
+
+        return jsonify({'submissions': submission_list }), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # Route for marks entry 
 @app.route('/marks', methods=['POST'])

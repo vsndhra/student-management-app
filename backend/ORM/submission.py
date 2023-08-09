@@ -1,4 +1,4 @@
-from mongoengine import Document, DateTimeField, StringField, EmailField, SequenceField, BooleanField
+from mongoengine import Document, DateTimeField, StringField, EmailField, SequenceField, BooleanField, FileField
 
 class Submission(Document):
 

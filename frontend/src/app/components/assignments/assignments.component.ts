@@ -56,6 +56,7 @@ export class AssignmentsComponent {
           }
       )
   }
+<<<<<<< HEAD
   
   showSubmission(): void{
     this.selectedContent = "showSubmission";
@@ -72,6 +73,9 @@ export class AssignmentsComponent {
           console.error('Error adding assignment:', error);
         }
     );
+=======
+  submitAssignment(): void{
+>>>>>>> origin/master
   }
 
 }
