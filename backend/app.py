@@ -263,5 +263,5 @@ def enter_marks():
     return jsonify({'message': 'Marks entered successfully.'}), 201
 
 if __name__ == '__main__':
-    #app.run(debug=True, host="192.168.0.106")
-    app.run(debug=True, host='192.168.0.106')
+    #app.run(debug=True, host='192.168.0.106')
+    app.run(debug=True)

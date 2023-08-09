@@ -1,0 +1,49 @@
+version: '3.2'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - mynetwork
+    environment:
+      MYSQL_HOST: mysql
+      MONGO_URI: mongodb://mongo:27017/mydb
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+    environment:
+      MYSQL_ROOT_PASSWORD: "bazzinga"
+      MYSQL_DATABASE: student-management
+      MYSQL_USER: root
+      MYSQL_PASSWORD: "bazzinga"
+      volumes:
+        "./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+    environment:
+      MONGO_INITDB_DATABASE: student-management
+networks:
+  mynetwork:
