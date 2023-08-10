@@ -1,46 +1,13 @@
-image:
-  file: .gitpod.Dockerfile
+image: gitpod/workspace-full
 
-# List of initial workspace commands to run
-before_workspace:
-  - echo "Installing dependencies..."
-  - npm install -g @angular/cli
-  - pip install -r backend/requirements.txt
-
-# List of tasks to run when the workspace is opened
 tasks:
-  - init: echo "Setting up environment..."
-    command: |
-      # Start MySQL and MongoDB services here if needed
-      # e.g., sudo service mysql start
-      # e.g., sudo service mongod start
-  - command: npm run start:frontend
-    init: echo "Starting Angular frontend..."
-    openMode: split
-  - command: flask run
-    init: echo "Starting Flask backend..."
-    openMode: split
-
+  name: Setup, Install and Build Frontend
+  before: cd frontend
+  init: npm install
+  command: ng serve
+# Ports to expose on workspace startup
 ports:
-  - port: 4200
-    onOpen: open-preview
-  - port: 5000
-    onOpen: ignore # Flask backend doesn't need preview
-
-# List of additional docker layers to pre-build into the image
-image-prebuild:
-  - name: nodejs
-    script: |
-      curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-      sudo apt-get install -y nodejs
-  - name: mongo
-    script: |
-      # Install MongoDB here if needed
-      sudo apt-get update
-      sudo apt-get install -y mongodb-org
-
-  - name: mysql
-    script: |
-      # Install MySQL here if needed
-      sudo apt-get update
-      sudo apt-get install -y mysql-server
+    - port: 4200
+      onOpen: open-preview
+      name: Frontend website
+      description: Frontend Preview
