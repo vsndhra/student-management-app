@@ -13,7 +13,7 @@ tasks:
       gp sync-done finished
     openMode: split-left
 
-  -name: Start Flask application
+  - name: Start Flask application
     init: |
       cd backend
       pip install -r reuirements.text
@@ -21,8 +21,8 @@ tasks:
       gp sync-await finishes && \
       flask run 
     openMode: split-right
-    
-  -name: Start Angular application
+
+  - name: Start Angular application
     init: |
       npm install && npm run build
     command: |
