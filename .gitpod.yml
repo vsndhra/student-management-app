@@ -1,17 +1,29 @@
-image:
-  file: .gitpod.Dockerfile
-
-tasks:
-  - name: Install Dependencies
-    init: |
-      cd frontend
-      npm install
-
-  - name: Launch Angular Frontend
-    init: |
-      cd frontend
-    command: ng serve --host 0.0.0.0 --port 8080
-
 ports:
+  - port: 5000
+    onOpen: ignore
   - port: 4200
     onOpen: open-preview
+
+tasks:
+  - name: Start mysql and mongodb
+    init: |
+      docker-compose pull
+    command: |
+      docker-compose up -d
+      gp sync-done finished
+    openMode: split-left
+
+  -name: Start Flask application
+    init: |
+      cd backend
+      pip install -r reuirements.text
+    command: |
+      gp sync-await finishes && \
+      flask run 
+    openMode: split-right
+    
+  -name: Start Angular application
+    init: |
+      npm install && npm run build
+    command: |
+      npm run start

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   mongo:
     image: mongo:latest
@@ -23,39 +23,40 @@ services:
     volumes:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  backend:
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
-    ports:
-      - "5000:5000"
-    environment:
-      MONGO_URI: "mongodb://mongo:27017/student-management"
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-    networks:
-      - mynetwork
-    depends_on:
-      - mongo
-      - mysql
+#   backend:
+#     build: 
+#       context: ./backend
+#       dockerfile: Dockerfile
+#     container_name: backend
+#     ports:
+#       - "5000:5000"
+#     environment:
+#       MONGO_URI: "mongodb://mongo:27017/student-management"
+#       MYSQL_HOST: mysql
+#       MYSQL_USER: root
+#       MYSQL_PASSWORD: root
+#     networks:
+#       - mynetwork
+#     depends_on:
+#       - mongo
+#       - mysql
   
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    ports:
-      - "80:80"
-    networks:
-      - mynetwork
-    depends_on:
-      - backend
+#   frontend:
+#     build: 
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     container_name: frontend
+#     ports:
+#       - "80:80"
+#     networks:
+#       - mynetwork
+#     depends_on:
+#       - backend
 
-networks:
-  mynetwork:
-    name: mynetwork
+# networks:
+#   mynetwork:
+#     name: mynetwork
+
 volumes:
   mongo-data:
 
