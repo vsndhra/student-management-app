@@ -1,28 +1,18 @@
-# Use an official Node.js LTS version as the base image
-FROM node:16
+# Use the base Gitpod image
+FROM gitpod/workspace-full
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
+# Install additional dependencies
+RUN sudo apt-get update && sudo apt-get install -y \
+    mysql-server \
+    mongodb
 
-# Install Docker for building images within Gitpod
-RUN curl -fsSL https://get.docker.com -o get-docker.sh
-RUN sh get-docker.sh
+# Configure MySQL
+RUN sudo service mysql start && \
+    sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" && \
+    sudo service mysql restart
 
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3-pip
-
-# Install MongoDB
-RUN apt-get install -y mongodb
-
-# Set working directory
-WORKDIR /workspace
-
-# Expose ports
+# Expose the necessary ports
 EXPOSE 8080
 
-# Start MongoDB server
-RUN mkdir -p /data/db
-CMD ["mongod", "--fork", "--logpath", "/var/log/mongodb.log"]
-
 # Start the workspace
-CMD ["/bin/bash"]
+CMD ["sleep", "infinity"]

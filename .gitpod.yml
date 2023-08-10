@@ -2,13 +2,6 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: |
-      # Start MySQL Server
-      service mysql start
-      # Start MongoDB
-      mongod --fork --logpath /var/log/mongodb.log
-    command: sleep infinity
-
   - name: Install Dependencies
     command: |
       cd frontend
