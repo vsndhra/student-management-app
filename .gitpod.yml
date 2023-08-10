@@ -1,17 +1,18 @@
-tasks:
-  - name: Install Angular CLI
-    init: npm install -g @angular/cli
-    command: echo "Angular CLI installed."
+image:
+  file: .gitpod.Dockerfile
 
-  - name: Setup and Run Angular App
+tasks:
+  - name: Install Dependencies
     init: |
       cd frontend
       npm install
-    command: npm run dev
+    command: cd frontend
 
-# Ports to expose on workspace startup
+  - name: Launch Angular Frontend
+    init: |
+      npm start
+    command: ng serve --host 0.0.0.0 --port 8080
+
 ports:
-    - port: 4200
-      onOpen: open-preview
-      name: Frontend website
-      description: Frontend Preview
+  - port: 4200
+    onOpen: open-preview
