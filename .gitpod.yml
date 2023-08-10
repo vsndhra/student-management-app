@@ -6,11 +6,10 @@ tasks:
     init: |
       cd frontend
       npm install
-    command: cd frontend
 
   - name: Launch Angular Frontend
     init: |
-      npm start
+      cd frontend
     command: ng serve --host 0.0.0.0 --port 8080
 
 ports:
