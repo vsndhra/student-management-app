@@ -2,6 +2,13 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
+  - init: |
+      # Start MySQL Server
+      service mysql start
+      # Start MongoDB
+      mongod --fork --logpath /var/log/mongodb.log
+    command: sleep infinity
+
   - name: Install Dependencies
     command: |
       cd frontend
@@ -9,17 +16,15 @@ tasks:
       cd ../backend
       pip install -r requirements.txt
 
-  - name: Start MySQL and MongoDB
-    init: |
-      # Start MySQL Server
-      service mysql start
-      # Start MongoDB
-      mongod --fork --logpath /var/log/mongodb.log
-
-  - name: Setup MySQL and MongoDB Databases
+  - name: Start Backend Server
     command: |
-      cd mysql
-      mysql -u root < init.sql
+      cd backend
+      python app.py
+
+  - name: Start Frontend Development Server
+    command: |
+      cd frontend
+      ng serve --host 0.0.0.0 --port 8080
 
 ports:
   - port: 8080
