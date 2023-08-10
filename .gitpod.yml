@@ -1,10 +1,10 @@
 image: gitpod/workspace-full
 
 tasks:
-  name: Setup, Install and Build Frontend
-  before: cd frontend
-  init: npm install
-  command: ng serve
+  - name: Setup, Install and Build Frontend
+    before: cd frontend
+    init: npm install
+    command: ng serve
 # Ports to expose on workspace startup
 ports:
     - port: 4200
