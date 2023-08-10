@@ -18,8 +18,8 @@ tasks:
       cd backend
       pip install -r requirements.txt
     command: |
-      gp sync-await finishes && \
-      flask run 
+      gp sync-await finished && \
+      python app.py
     openMode: split-right
 
   - name: Start Angular application
