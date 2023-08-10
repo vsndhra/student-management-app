@@ -12,10 +12,12 @@ from datetime import datetime, time
 app = Flask(__name__)
 CORS(app)
 
-app.config['MYSQL_HOST'] = "127.0.0.1"
+# app.config['MYSQL_HOST'] = "127.0.0.1"
+app.config['MYSQL_HOST'] = "mysql"
 app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL_DB'] = "student-management"
+app.config['MYSQL_PASSWORD'] = "root"
+# app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "student_management"
 app.config['SECRET_KEY'] = 'yplshtjaksywqosndhfyrksmalpsdjuf'
 UPLOAD_FOLDER = 'uploads'  # Specify the folder where files will be saved
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -28,6 +30,11 @@ mysql = MySQL(app)
 
 # Encrypting the password
 bcrypt = Bcrypt(app)
+
+
+@app.route('/check', methods=['GET'])
+def check():
+    return "Works Fine..."
 
 # Route for user registration
 @app.route('/api/register', methods=['POST'])
@@ -264,4 +271,4 @@ def enter_marks():
 
 if __name__ == '__main__':
     #app.run(debug=True, host='192.168.0.106')
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0', port=5000)
