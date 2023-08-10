@@ -1,0 +1,30 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Install Dependencies
+    command: |
+      cd frontend
+      npm install
+      cd ../backend
+      pip install -r requirements.txt
+
+  - name: Start Backend Server
+    command: |
+      cd backend
+      python app.py
+
+  - name: Start Frontend Development Server
+    command: |
+      cd frontend
+      ng serve --host 0.0.0.0 --port 8080
+
+ports:
+  - port: 8080
+    onOpen: open-preview
+
+# vscode:
+#   extensions:
+#     - dbaeumer.vscode-eslint
+
+
