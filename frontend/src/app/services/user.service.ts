@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private registerAPI = environment.apiUrl+'/api/register'; 
+  private registerAPI = environment.apiUrl+'/register'; 
   private updateAPI = environment.apiUrl+'/api/update'; 
   private addAssignmentAPI = environment.apiUrl+'/api/addAssignment'; 
   private getAssignmentAPI = environment.apiUrl+'/api/getAssignment'; 

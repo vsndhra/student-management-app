@@ -51,7 +51,7 @@ def get_backend_url():
         return jsonify({"message": "BACKEND_URL is not set"}), 500
 
 # Route for user registration
-@app.route('/api/register', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def register_user():
 
     data = request.get_json()
