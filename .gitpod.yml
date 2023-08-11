@@ -29,8 +29,6 @@ tasks:
       gp sync-await finished && \
       python app.py
     openMode: split-right
-    dependsOn:  
-      - "Start mysql and mongodb"
 
   - name: Start Angular application
     init: |
