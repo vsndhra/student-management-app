@@ -27,6 +27,7 @@ export class UserService {
 
   registerUser(data: any): Observable<any> {
     // Send the POST request to the Flask API
+    console.log(data);
     return this.http.post<any>(this.registerAPI, data, this.httpOptions);
   }
 
