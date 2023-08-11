@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private registerAPI = '/api/register'; // Replace with your Flask API URL for registration
-  private updateAPI = '/api/update'; // Replace with your Flask API URL for updation
-  private addAssignmentAPI = '/api/addAssignment'; // Replace with your Flask API URL for adding assignmen
-  private getAssignmentAPI = '/api/getAssignment'; // Replace with your Flask API URL for getting assignmrnt
-  private submitAssignmentAPI = '/api/submitAssignment'; // Replace with your Flask API URL for getting assignmrnt
-  private getSubmissionAPI = '/api/getSubmission'; // Replace with your Flask API URL for getting assignmrnt
+  private registerAPI = environment.apiUrl+'/api/register'; 
+  private updateAPI = environment.apiUrl+'/api/update'; 
+  private addAssignmentAPI = environment.apiUrl+'/api/addAssignment'; 
+  private getAssignmentAPI = environment.apiUrl+'/api/getAssignment'; 
+  private submitAssignmentAPI = environment.apiUrl+'/api/submitAssignment'; 
+  private getSubmissionAPI = environment.apiUrl+'/api/getSubmission';
 
   constructor(private http: HttpClient) { }
 

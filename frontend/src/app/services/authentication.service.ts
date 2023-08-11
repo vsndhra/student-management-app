@@ -16,7 +16,7 @@ export class AuthenticationService {
   private email: string = '';
   private role: string = '';
 
-  private apiUrl = '/api/login'; // Replace with your Flask API URL
+  private apiUrl = environment.apiUrl+'/api/login'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) { }
 

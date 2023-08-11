@@ -35,4 +35,6 @@ tasks:
       cd frontend
       npm install && npm run build 
     command: |
+      backend_url=$(gp url 5000)  # Get the backend URL
+      sed -i "s|API_URL|$backend_url|g" src/environments/environment.ts  
       npm run start
