@@ -4,7 +4,6 @@ ports:
   - port: 5000
     onOpen: ignore
   - port: 4200
-    protocol: https
     onOpen: open-preview
 
 tasks:
