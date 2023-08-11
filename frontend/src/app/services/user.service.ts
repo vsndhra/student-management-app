@@ -19,8 +19,7 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json'
-    }),
-    method: 'OPTIONS' 
+    })
   };
 
   constructor(private http: HttpClient) { }

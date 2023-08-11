@@ -60,7 +60,7 @@ def get_backend_url():
         return jsonify({"message": "BACKEND_URL is not set"}), 500
 
 # Route for user registration
-@app.route('/api/register', methods=['POST', 'OPTIONS'])
+@app.route('/api/register', methods=['POST'])
 def register_user():
 
     data = request.get_json()
@@ -75,7 +75,9 @@ def register_user():
     try:
         mysql.connection.commit()
         cursor.close()
-        return jsonify({'success': 'User registered successfully.'}), 201
+        response = jsonify({'success': 'User registered successfully.'})
+        response.headers['Content-Type'] = 'application/json'  # Set the correct content type
+        return response, 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500     
 
