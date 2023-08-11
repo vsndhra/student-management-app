@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -16,11 +16,18 @@ export class UserService {
   private submitAssignmentAPI = environment.apiUrl+'/api/submitAssignment'; 
   private getSubmissionAPI = environment.apiUrl+'/api/getSubmission';
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    withCredentials: true  // Include cookies and credentials in the request
+  };
+
   constructor(private http: HttpClient) { }
 
   registerUser(data: any): Observable<any> {
     // Send the POST request to the Flask API
-    return this.http.post<any>(this.registerAPI, data, { withCredentials: true });
+    return this.http.post<any>(this.registerAPI, data, this.httpOptions);
   }
 
   updateUser(data: any): Observable<any> {
