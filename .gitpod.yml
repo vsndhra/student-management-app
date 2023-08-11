@@ -36,6 +36,6 @@ tasks:
   - name: Start Angular application
     init: |
       cd frontend
-      npm install && npm run build &&  ng analytics off
+      npm install && npm run build 
     command: |
       npm run start
