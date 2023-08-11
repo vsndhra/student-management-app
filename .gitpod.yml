@@ -39,4 +39,4 @@ tasks:
       npm install && npm run build
     command: |
       npm run start
-      ng analytics disable
+      ng analytics off
