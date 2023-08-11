@@ -19,6 +19,7 @@ BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:5000')
 app.config['MYSQL_HOST'] = "mysql"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = "root"
+app.config['MYSQL_PORT'] = 3306
 # app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "student_management_system"
 app.config['SECRET_KEY'] = 'yplshtjaksywqosndhfyrksmalpsdjuf'
