@@ -45,8 +45,10 @@ def after_request(response):
 @app.route('/', methods=['GET'])
 def check():
     cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO users (name, email, role, password) VALUES (%s, %s, %s, %s)", ('abc', 'abc@gmail.com', 'student', 'abc'))
+    mysql.connection.commit()
     cursor.execute('SELECT * FROM users')
-    users = cursor.fetchone()
+    users = cursor.fetchall()
     cursor.close()
     return jsonify({'users': users})
 
@@ -73,11 +75,10 @@ def register_user():
     cursor.execute("INSERT INTO users (name, email, role, password) VALUES (%s, %s, %s, %s)", (name, email, role, password))
     try:
         mysql.connection.commit()
+        cursor.close()
         return jsonify({'success': 'User registered successfully.'}), 201
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    cursor.close()
-     
+        return jsonify({'error': str(e)}), 500     
 
 
 # Route for user login
