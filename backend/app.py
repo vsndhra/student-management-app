@@ -11,7 +11,7 @@ from datetime import datetime, time
 
 app = Flask(__name__)
 CORS(app,  origins=[os.environ.get('BACKEND_URL')])
-
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_HOST'] = "172.17.0.1"
@@ -58,6 +58,7 @@ def get_backend_url():
 
 # Route for user registration
 @app.route('/api/register', methods=['POST', 'OPTIONS'])
+@cross_origin()
 def register_user():
 
     data = request.get_json()
@@ -80,6 +81,7 @@ def register_user():
 
 # Route for user login
 @app.route('/api/login', methods=['POST', 'OPTIONS'])
+@cross_origin()
 def login():
 
     data = request.get_json()
