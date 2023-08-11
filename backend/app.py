@@ -12,6 +12,9 @@ from datetime import datetime, time
 app = Flask(__name__)
 CORS(app)
 
+# this line was added
+BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:5000')
+
 # app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_HOST'] = "mysql"
 app.config['MYSQL_USER'] = "root"

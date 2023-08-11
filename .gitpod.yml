@@ -7,6 +7,11 @@ ports:
     onOpen: open-preview
 
 tasks:
+    # added this
+  - name: Update Environment Variable
+    init: |
+      sed -i "s|YOUR_DYNAMIC_API_URL|$(gp url 4200)|g" frontend/src/environments/environment.ts
+
   - name: Start mysql and mongodb
     init: |
       docker-compose pull
@@ -19,7 +24,11 @@ tasks:
     init: |
       cd backend
       pip install -r requirements.txt
+    # added 3 lines export lines
     command: |
+      export FLASK_APP=app.py            
+      export FLASK_ENV=development
+      export BACKEND_URL=$(gp url 5000)  # Set the dynamic URL here
       gp sync-await finished && \
       python app.py
     openMode: split-right

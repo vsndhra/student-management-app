@@ -1,4 +1,4 @@
 export const environment = {
-   production: true,
-  apiUrl: 'http://127.0.0.1:5000/api/'
+  production: false,
+  apiUrl: 'YOUR_DYNAMIC_API_URL', // Placeholder for dynamic URL
 };
