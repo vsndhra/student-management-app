@@ -58,7 +58,6 @@ def get_backend_url():
 
 # Route for user registration
 @app.route('/api/register', methods=['POST', 'OPTIONS'])
-@cross_origin()
 def register_user():
 
     data = request.get_json()
@@ -81,7 +80,6 @@ def register_user():
 
 # Route for user login
 @app.route('/api/login', methods=['POST', 'OPTIONS'])
-@cross_origin()
 def login():
 
     data = request.get_json()
