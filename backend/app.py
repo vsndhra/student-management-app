@@ -33,6 +33,16 @@ mysql = MySQL(app)
 # Encrypting the password
 bcrypt = Bcrypt(app)
 
+@app.after_request
+def add_cors_headers(response):
+    requesting_origin = request.headers.get('Origin')
+    
+    # Check if the requesting origin is in a list of allowed origins
+    allowed_origins = [os.environ.get('BACKEND_URL')]
+    if requesting_origin in allowed_origins:
+        response.headers['Access-Control-Allow-Origin'] = requesting_origin
+    
+    return response
 
 @app.route('/', methods=['GET'])
 def check():
