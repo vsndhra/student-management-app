@@ -10,10 +10,7 @@ import os
 from datetime import datetime, time
 
 app = Flask(__name__)
-CORS(app)
-
-# this line was added
-BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:5000')
+CORS(app, origins=[os.environ.get('BACKEND_URL')])
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_HOST'] = "172.17.0.1"
@@ -43,6 +40,14 @@ def check():
     users = cursor.fetchone()
     cursor.close()
     return jsonify({'users': users})
+
+@app.route('/get_backend_url', methods=['GET'])
+def get_backend_url():
+    backend_url = os.environ.get('BACKEND_URL')
+    if backend_url:
+        return jsonify({"backend_url": backend_url})
+    else:
+        return jsonify({"message": "BACKEND_URL is not set"}), 500
 
 # Route for user registration
 @app.route('/api/register', methods=['POST'])
