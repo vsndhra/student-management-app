@@ -1,11 +1,9 @@
 image:
   file: .gitpod.Dockerfile
 ports:
-  - name: Flask Backend
-    port: 5000
+  - port: 5000
     onOpen: ignore
-  - name: Angular Frontend
-    port: 4200
+  - port: 4200
     protocol: https
     onOpen: open-preview
 
