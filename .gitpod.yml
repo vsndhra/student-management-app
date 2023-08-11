@@ -16,8 +16,8 @@ tasks:
       gp sync-done finished
       docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
       echo "Docker Host IP: $docker_host_ip"
-      # Add Docker host IP to Flask environment configuration
-      sed -i "s|'MYSQL_HOST': '.*'|'MYSQL_HOST': '$docker_host_ip'|g" backend/app.py
+      Pass Docker host IP as environment variable to Flask application
+      echo "export DOCKER_HOST_IP=$docker_host_ip" >> /workspace/.bashrc
     openMode: split-left
 
   - name: Start Flask application
@@ -26,9 +26,9 @@ tasks:
       pip install -r requirements.txt
     # added 3 lines export lines
     command: |
-      export FLASK_APP=app.py            
-      export FLASK_ENV=development
-      export BACKEND_URL=$(gp url 5000)  # Set the dynamic URL here
+      source /workspace/.bashrc  # Load the environment variables
+      export MYSQL_HOST=$DOCKER_HOST_IP  # Set the MySQL host dynamically
+      echo MYSQL_HOST
       gp sync-await finished && \
       python app.py
     openMode: split-right
