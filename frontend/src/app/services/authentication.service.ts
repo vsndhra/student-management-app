@@ -21,7 +21,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   loginUser(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
+    return this.http.post<any>(this.apiUrl, data, { withCredentials: true });
   }
 
   setUserData(isLoggedIn: boolean, name: string, email: string, role: string): void {
