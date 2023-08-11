@@ -7,17 +7,12 @@ ports:
     onOpen: open-preview
 
 tasks:
-
   - name: Start mysql and mongodb
     init: |
       docker-compose pull
     command: |
       docker-compose up -d
       gp sync-done finished
-      docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-      echo "Docker Host IP: $docker_host_ip"
-      Pass Docker host IP as environment variable to Flask application
-      echo "export DOCKER_HOST_IP=$docker_host_ip" >> /workspace/.bashrc
     openMode: split-left
 
   - name: Start Flask application
@@ -26,12 +21,14 @@ tasks:
       pip install -r requirements.txt
     # added 3 lines export lines
     command: |
-      source /workspace/.bashrc  # Load the environment variables
-      export MYSQL_HOST=$DOCKER_HOST_IP  # Set the MySQL host dynamically
-      echo MYSQL_HOST
+      docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+      echo "Docker Host IP: $docker_host_ip"
+      export MYSQL_HOST=$docker_host_ip
       gp sync-await finished && \
       python app.py
     openMode: split-right
+    dependsOn:  
+      - "Start mysql and mongodb"
 
   - name: Start Angular application
     init: |
