@@ -18,14 +18,16 @@ tasks:
     command: |
       docker-compose up -d
       gp sync-done finished
-    openMode: split-left
-
-  # Task to find Docker host IP and echo it
-  - name: Find Docker Host IP
-    init: |
       docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
       echo "Docker Host IP: $docker_host_ip"
-      
+    openMode: split-left
+
+  # # Task to find Docker host IP and echo it
+  # - name: Find Docker Host IP
+  #   init: |
+  #     docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+  #     echo "Docker Host IP: $docker_host_ip"
+
   - name: Start Flask application
     init: |
       cd backend
