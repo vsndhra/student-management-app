@@ -10,7 +10,7 @@ import os
 from datetime import datetime, time
 
 app = Flask(__name__)
-CORS(app, origins=[os.environ.get('BACKEND_URL')])
+CORS(app, resources={r"/api/*":{origins=[os.environ.get('BACKEND_URL')]}})
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_HOST'] = "172.17.0.1"
