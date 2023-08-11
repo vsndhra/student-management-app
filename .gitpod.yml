@@ -13,6 +13,8 @@ tasks:
     command: |
       docker-compose up -d
       gp sync-done finished
+      docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+      echo "Docker Host IP: $docker_host_ip"
     openMode: split-left
 
   - name: Start Flask application
@@ -21,9 +23,9 @@ tasks:
       pip install -r requirements.txt
     # added 3 lines export lines
     command: |
-      docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-      echo "Docker Host IP: $docker_host_ip"
-      export MYSQL_HOST=$docker_host_ip
+      export FLASK_APP=app.py            
+      export FLASK_ENV=development
+      export BACKEND_URL=$(gp url 5000)  # Set the dynamic URL here
       gp sync-await finished && \
       python app.py
     openMode: split-right
