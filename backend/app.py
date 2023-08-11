@@ -16,7 +16,7 @@ CORS(app)
 BACKEND_URL = os.environ.get('BACKEND_URL', 'http://localhost:5000')
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
-app.config['MYSQL_HOST'] = "mysql"
+app.config['MYSQL_HOST'] = "172.17.0.1"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = "root"
 app.config['MYSQL_PORT'] = 3306
