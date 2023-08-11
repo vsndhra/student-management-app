@@ -10,7 +10,7 @@ import os
 from datetime import datetime, time
 
 app = Flask(__name__)
-CORS(app)
+CORS(app,  resources={r"/api/*": {"origins": os.environ.get('BACKEND_URL')}})
 
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
@@ -76,7 +76,7 @@ def register_user():
     cursor.execute("INSERT INTO users (name, email, role, password) VALUES (%s, %s, %s, %s)", (name, email, role, password))
     try:
         mysql.connection.commit()
-        return jsonify({'success': 'User registered successfully.'}).headers.add("Access-Control-Allow-Origin", "*"), 201
+        return jsonify({'success': 'User registered successfully.'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     cursor.close()
