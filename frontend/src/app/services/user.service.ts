@@ -20,7 +20,7 @@ export class UserService {
     headers: new HttpHeaders({
       'content-type': 'application/json'
     }),
-    // withCredentials: true  // Include cookies and credentials in the request
+    method: 'OPTIONS' 
   };
 
   constructor(private http: HttpClient) { }
