@@ -18,9 +18,9 @@ export class UserService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'content-type': 'application/json'
     }),
-    withCredentials: true  // Include cookies and credentials in the request
+    // withCredentials: true  // Include cookies and credentials in the request
   };
 
   constructor(private http: HttpClient) { }
