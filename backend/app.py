@@ -76,7 +76,7 @@ def register_user():
         mysql.connection.commit()
         cursor.close()
         response = jsonify({'success': 'User registered successfully.'})
-        response.headers['Content-Type'] = 'application/json'  # Set the correct content type
+        response.headers['Content-Type'] = 'application/json' 
         return response, 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500     
@@ -106,12 +106,17 @@ def login():
                 'email': email
             }
             token = jwt.encode(token_payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
-
-            return jsonify({'Success': 'Login successful.','token': token}), 200
+            response = jsonify({'Success': 'Login successful.','token': token})
+            response.headers['Content-Type'] = 'application/json' 
+            return response, 200
         else:
-            return jsonify({'error': 'Invalid credentials'}), 401
+            response = jsonify({'error': 'Invalid credentials'})
+            response.headers['Content-Type'] = 'application/json' 
+            return response, 401
     else:
-        return jsonify({'error': 'User not found'}), 404
+        response = jsonify({'error': 'User not found'})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 404
 
 # Route for profile creation
 @app.route('/api/update', methods=['POST'])
@@ -140,9 +145,13 @@ def updateUser():
             try:
                 mysql.connection.commit()
                 cursor.close()
-                return jsonify({'success': 'User updated successfully.'}), 201
+                response = jsonify({'success': 'User updated successfully.'})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 201
             except Exception as e:
-                return jsonify({'error': str(e)}), 500
+                response = jsonify({'error': str(e)})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 500
 
         else:
             
@@ -152,9 +161,13 @@ def updateUser():
             try:
                 mysql.connection.commit()
                 cursor.close()
-                return jsonify({'success': 'User updated successfully.'}), 201
+                response = jsonify({'success': 'User updated successfully.'})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 201
             except Exception as e:
-                return jsonify({'error': str(e)}), 500
+                response = jsonify({'error': str(e)})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 500
     
     elif(data['role'] == 'staff'):
     
@@ -175,9 +188,13 @@ def updateUser():
             try:
                 mysql.connection.commit()
                 cursor.close()
-                return jsonify({'success': 'User updated successfully.'}), 201
+                response = jsonify({'success': 'User updated successfully.'})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 201
             except Exception as e:
-                return jsonify({'error': str(e)}), 500
+                response = jsonify({'error': str(e)})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 500
 
         else:
             
@@ -187,9 +204,13 @@ def updateUser():
             try:
                 mysql.connection.commit()
                 cursor.close()
-                return jsonify({'success': 'User updated successfully.'}), 201
+                response = jsonify({'success': 'User updated successfully.'})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 201
             except Exception as e:
-                return jsonify({'error': str(e)}), 500
+                response = jsonify({'error': str(e)})
+                response.headers['Content-Type'] = 'application/json' 
+                return response, 500
 
 # Route for adding assignments
 @app.route('/api/addAssignment', methods=['POST'])
@@ -207,10 +228,14 @@ def addAssignment():
 
     try:
         assignment.save()
-        return jsonify({'success': 'Assignment added successfully.'}), 201
+        response = jsonify({'success': 'Assignment added successfully.'})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 201
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        response = jsonify({'error': str(e)})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 500
 
 # Route for getting assignments
 @app.route('/api/getAssignment', methods=['GET']) 
@@ -231,11 +256,14 @@ def getAssignment():
             }
             assignment_list.append(assignment_data)
 
-        # return jsonify({'Success': 'successful.','assignments': assignment_list}), 200
-        return jsonify({'assignments': assignment_list }), 200
+        response = jsonify({'assignments': assignment_list })
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        response = jsonify({'error': str(e)})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 500
 
 # Route for assignment submissions
 @app.route('/api/submitAssignment', methods=['POST'])
@@ -256,10 +284,14 @@ def submitAssignment():
     submission.file = filename
     try:
         submission.save()
-        return jsonify({'success': 'Assignment submitted successfully.'}), 201
+        response = jsonify({'success': 'Assignment submitted successfully.'})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 201
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        response = jsonify({'error': str(e)})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 500
 
 @app.route('/api/getSubmission', methods=['GET'])
 def getSubmission():
@@ -279,10 +311,14 @@ def getSubmission():
             }
             submission_list.append(submission_data)
 
-        return jsonify({'submissions': submission_list }), 200
+        response = jsonify({'submissions': submission_list })
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        response = jsonify({'error': str(e)})
+        response.headers['Content-Type'] = 'application/json' 
+        return response, 500
 
 
 # Route for marks entry 
@@ -291,7 +327,9 @@ def enter_marks():
     data = request.get_json()
     # Validate data and save marks to the database
     # Return appropriate response or error messages.
-    return jsonify({'message': 'Marks entered successfully.'}), 201
+    response = jsonify({'message': 'Marks entered successfully.'})
+    response.headers['Content-Type'] = 'application/json' 
+    return response, 201
 
 if __name__ == '__main__':
     #app.run(debug=True, host='192.168.0.106')
