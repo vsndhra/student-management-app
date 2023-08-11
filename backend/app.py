@@ -36,9 +36,13 @@ mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 
 
-@app.route('/check', methods=['GET'])
+@app.route('/', methods=['GET'])
 def check():
-    return "Works Fine..."
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchone()
+    cursor.close()
+    return jsonify({'users': users})
 
 # Route for user registration
 @app.route('/api/register', methods=['POST'])
