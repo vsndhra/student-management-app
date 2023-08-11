@@ -11,7 +11,6 @@ from datetime import datetime, time
 
 app = Flask(__name__)
 CORS(app,  origins=[os.environ.get('BACKEND_URL'), os.environ.get('FRONTEND_URL')], 
-     methods=["GET", "POST"],
      allow_headers=["Content-Type", "Authorization"],
      expose_headers=["X-Custom-Header"],
      supports_credentials=True)
