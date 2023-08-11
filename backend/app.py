@@ -11,14 +11,12 @@ from datetime import datetime, time
 
 app = Flask(__name__)
 CORS(app,  origins=[os.environ.get('BACKEND_URL')])
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 # app.config['MYSQL_HOST'] = "127.0.0.1"
 app.config['MYSQL_HOST'] = "172.17.0.1"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = "root"
 app.config['MYSQL_PORT'] = 3306
-# app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "student_management_system"
 app.config['SECRET_KEY'] = 'yplshtjaksywqosndhfyrksmalpsdjuf'
 UPLOAD_FOLDER = 'uploads'  # Specify the folder where files will be saved
