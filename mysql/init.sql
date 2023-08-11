@@ -1,6 +1,6 @@
 -- Create the database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS student_management;
-USE student_management;
+CREATE DATABASE IF NOT EXISTS student_management_system;
+USE student_management_system;
 
 -- Create the 'users' table
 CREATE TABLE users (
