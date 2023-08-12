@@ -83,7 +83,7 @@ def register_user():
 
 
 # Route for user login
-@app.route('/api/login', methods=['POST', 'OPTIONS'])
+@app.route('/api/login', methods=['POST'])
 def login():
 
     data = request.get_json()
