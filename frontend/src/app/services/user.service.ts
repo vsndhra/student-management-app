@@ -32,24 +32,24 @@ export class UserService {
 
   updateUser(data: any): Observable<any> {
     console.log(data);
-    return this.http.post<any>(this.updateAPI, data, { withCredentials: true });
+    return this.http.post<any>(this.updateAPI, data, this.httpOptions);
   }
 
   addAssignment(data: any): Observable<any> {
     console.log(data);
-    return this.http.post<any>(this.addAssignmentAPI, data, { withCredentials: true });
+    return this.http.post<any>(this.addAssignmentAPI, data, this.httpOptions);
   }
 
   getAssignment(): Observable<any> {
-    return this.http.get<any>(this.getAssignmentAPI, { withCredentials: true });
+    return this.http.get<any>(this.getAssignmentAPI, this.httpOptions);
   }
 
   submitAssignment(data: any): Observable<any> {
-    return this.http.post<any>(this.submitAssignmentAPI, data, { withCredentials: true });
+    return this.http.post<any>(this.submitAssignmentAPI, data, this.httpOptions);
   }
 
   getSubmissions(): Observable<any> {
-    return this.http.get<any>(this.getSubmissionAPI, { withCredentials: true });
+    return this.http.get<any>(this.getSubmissionAPI, this.httpOptions);
   }
   
 }

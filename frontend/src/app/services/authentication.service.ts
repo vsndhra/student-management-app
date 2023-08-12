@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -18,10 +18,16 @@ export class AuthenticationService {
 
   private apiUrl = environment.apiUrl+'/api/login'; // Replace with your Flask API URL
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'content-type': 'application/json'
+    })
+  };
+
   constructor(private http: HttpClient) { }
 
   loginUser(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data, { withCredentials: true });
+    return this.http.post<any>(this.apiUrl, data, this.httpOptions);
   }
 
   setUserData(isLoggedIn: boolean, name: string, email: string, role: string): void {
