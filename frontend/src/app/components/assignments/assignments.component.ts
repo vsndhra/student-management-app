@@ -25,13 +25,15 @@ export class AssignmentsComponent {
   ngOnInit(): void {
     this.isLoggedIn = this.autheticationService.getIsLoggedIn();
     this.role = this.autheticationService.getRole();
-    this.userService.getAssignment().subscribe((assignment)=>{
-      this.assignments = assignment;
-      this.loader = false;
-      console.log(this.loader);
-    });
-    
-  }
+    this.userService.getAssignment().subscribe(response => {
+        console.log(response);
+        this.assignments = response.assignments; 
+        console.log(this.assignments)
+        },
+        error => {
+          console.error('Error getting assignment:', error);
+        }
+    );}
 
   onContentSelected(contentId: string) {
     this.selectedContent = contentId;
