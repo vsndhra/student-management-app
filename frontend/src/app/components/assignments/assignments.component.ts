@@ -14,6 +14,9 @@ export class AssignmentsComponent {
   selectedContent: string = 'listAssignment'; // Set default content
   assignments: any[] = []; // Initialize the assignments array
 
+  add_sucess: string ='';
+  add_error: string = '';
+
   constructor(
     private autheticationService: AuthenticationService,
     private userService: UserService,
@@ -31,13 +34,16 @@ export class AssignmentsComponent {
   }
 
   addAssignment(assignmentData: any){
+
     this.userService.addAssignment(assignmentData)
     .subscribe(
         response => {
           console.log('Assignment added successfully: ', response);
+          this.add_sucess = response.success
           this.selectedContent = "listAssignment";
         },
         error => {
+          this.add_error = "Assignment was not added successfully"
           console.error('Error adding assignment:', error);
         }
     );
