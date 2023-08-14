@@ -15,8 +15,8 @@ CORS(app,  origins=[os.environ.get('BACKEND_URL'), os.environ.get('FRONTEND_URL'
      expose_headers=["X-Custom-Header"],
      supports_credentials=True)
 
-# app.config['MYSQL_HOST'] = "127.0.0.1"
-app.config['MYSQL_HOST'] = "172.17.0.1"
+app.config['MYSQL_HOST'] = os.environ.get('DOCKER_IP')
+# app.config['MYSQL_HOST'] = "172.17.0.1"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = "root"
 app.config['MYSQL_PORT'] = 3306
