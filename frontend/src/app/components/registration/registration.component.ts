@@ -32,7 +32,7 @@ export class RegistrationComponent {
           }, 2000);
         },
         error => {
-          this.error = "Error registering user"
+          this.error = error
           console.error('Error registering user:', error);
           // Handle the error, display an error message, or redirect to an error page.
         }
