@@ -1,10 +1,3 @@
-<ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple">
-<p style="font-size: 20px; color: white">Loading...</p>
-</ngx-spinner>
 <div class="container-fluid p-3">
    <div class="top-container p-2">
       <div class="row border-bottom border-2 border-secondary pb-2">
@@ -52,6 +45,7 @@
             </td>
            </tr>
          </tbody>
+         <ngx-skeleton-loader count="5" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
        </table>
    </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'addAssignment'">

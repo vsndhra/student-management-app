@@ -13,7 +13,7 @@ export class AssignmentsComponent {
   isLoggedIn: boolean = false;
   selectedContent: string = 'listAssignment'; // Set default content
   assignments: any[] = [];  // Initialize the assignments array
-
+  loader: boolean = true;
   add_success: string ='';
   add_error: string = '';
 
@@ -25,7 +25,10 @@ export class AssignmentsComponent {
   ngOnInit(): void {
     this.isLoggedIn = this.autheticationService.getIsLoggedIn();
     this.role = this.autheticationService.getRole();
-    this.getAssignments();
+    this.userService.getAssignment().subscribe((assignment)=>{
+      this.assignments = assignment;
+      this.loader = false;
+    });
     
   }
 
@@ -49,19 +52,19 @@ export class AssignmentsComponent {
     );
   }
 
-  getAssignments(){
-    this.userService.getAssignment()
-      .subscribe(
-          response => {
-            console.log(response);
-            this.assignments = response.assignments; 
-            console.log(this.assignments)
-          },
-          error => {
-            console.error('Error getting assignment:', error);
-          }
-      )
-  }
+  // getAssignments(){
+  //   this.userService.getAssignment()
+  //     .subscribe(
+  //         response => {
+  //           console.log(response);
+  //           this.assignments = response.assignments; 
+  //           console.log(this.assignments)
+  //         },
+  //         error => {
+  //           console.error('Error getting assignment:', error);
+  //         }
+  //     )
+  // }
   
   showSubmission(): void{
     this.selectedContent = "showSubmission";
