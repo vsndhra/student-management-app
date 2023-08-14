@@ -10,6 +10,11 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
+  // Subject to get assignment data
+  assignmentData = new Subject<any[]>();
+
+  private assignments: any[] = [];
+
   private registerAPI = environment.apiUrl+'/api/register'; 
   private updateAPI = environment.apiUrl+'/api/update'; 
   private addAssignmentAPI = environment.apiUrl+'/api/addAssignment'; 
@@ -38,18 +43,11 @@ export class UserService {
 
   addAssignment(data: any): Observable<any> {
     console.log(data);
-    // this.http.get<any>(this.getAssignmentAPI, this.httpOptions).subscribe(
-    //   (data) => {
-    //     this.assignmentData.next(data); // Emit the fetched data
-    //   },
-    //   (error) => {
-    //     console.error('Error fetching assignment data:', error);
-    //   }
-    // );
     return this.http.post<any>(this.addAssignmentAPI, data, this.httpOptions);
   }
 
   getAssignment(): Observable<any> {
+
     return this.http.get<any>(this.getAssignmentAPI, this.httpOptions);
   }
 

@@ -27,12 +27,6 @@ export class HeaderComponent {
       });
     }
     
-  // ngOnInit(): void {
-  //   this.isLoggedIn = this.autheticationService.getIsLoggedIn();
-  //   this.userName = this.autheticationService.getUserName();
-  //   console.log("From header "+this.isLoggedIn)
-  // }
-
   logout() {
     // Clear user data on logout
     this.autheticationService.clearUserData();
