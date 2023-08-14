@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -37,6 +38,14 @@ export class UserService {
 
   addAssignment(data: any): Observable<any> {
     console.log(data);
+    // this.http.get<any>(this.getAssignmentAPI, this.httpOptions).subscribe(
+    //   (data) => {
+    //     this.assignmentData.next(data); // Emit the fetched data
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching assignment data:', error);
+    //   }
+    // );
     return this.http.post<any>(this.addAssignmentAPI, data, this.httpOptions);
   }
 

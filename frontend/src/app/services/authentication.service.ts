@@ -31,6 +31,7 @@ export class AuthenticationService {
   }
 
   setUserData(isLoggedIn: boolean, name: string, email: string, role: string): void {
+    
     this.isLoggedIn = isLoggedIn;
     this.userName = name;
     this.email = email;

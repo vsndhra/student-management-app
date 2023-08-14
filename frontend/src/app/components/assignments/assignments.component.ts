@@ -12,7 +12,7 @@ export class AssignmentsComponent {
   role: string = '';
   isLoggedIn: boolean = false;
   selectedContent: string = 'listAssignment'; // Set default content
-  assignments: any[] = []; // Initialize the assignments array
+  assignments: any[] = [];  // Initialize the assignments array
 
   add_success: string ='';
   add_error: string = '';
@@ -61,6 +61,11 @@ export class AssignmentsComponent {
             console.error('Error getting assignment:', error);
           }
       )
+
+    // // Subscribe to the assignmentData Subject
+    // this.userService.assignmentData.subscribe((assignment) => {
+    //   this.assignments = assignment;
+    // });
   }
   
   showSubmission(): void{
