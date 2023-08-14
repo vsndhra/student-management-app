@@ -61,11 +61,6 @@ export class AssignmentsComponent {
             console.error('Error getting assignment:', error);
           }
       )
-
-    // // Subscribe to the assignmentData Subject
-    // this.userService.assignmentData.subscribe((assignment) => {
-    //   this.assignments = assignment;
-    // });
   }
   
   showSubmission(): void{
