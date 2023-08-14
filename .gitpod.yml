@@ -31,7 +31,7 @@ tasks:
       export BACKEND_URL=$(gp url 5000) 
       docker_host_ip=$(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
       echo "Docker Host IP: $docker_host_ip" 
-      export DOCKER_IP = $docker_host_ip
+      export DOCKER_IP = $(ip -4 addr show docker0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
       gp sync-await finished && \
       python app.py
     openMode: split-right
