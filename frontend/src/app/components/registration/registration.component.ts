@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 
 export class RegistrationComponent {
 
-  successMessage: string = ''; // Variable to store the success message
+  success: string = ''; // Variable to store the success message
+  error: string = ''; // Variable to store the success message
   constructor(private userService: UserService, private router: Router) { }
 
   registerUser(userData: any) {
@@ -20,11 +21,18 @@ export class RegistrationComponent {
       .subscribe(
         response => {
           console.log('User registered successfully:', response);
-          // this.successMessage = response.message;
-          // Redirect to a success page or login page after successful registration
-          this.router.navigate(['/login']);
+          this.success = "User registered successfully";
+
+          // // Redirect to a success page or login page after successful registration
+          // this.router.navigate(['/login']);
+
+          // Delay navigation 
+          setTimeout(() => {
+            this.router.navigate(['/login']); // Redirect after 2 seconds
+          }, 2000);
         },
         error => {
+          this.error = "Error registering user"
           console.error('Error registering user:', error);
           // Handle the error, display an error message, or redirect to an error page.
         }

@@ -5,6 +5,9 @@
       </div>
       <!-- <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p> -->
       <form #userData="ngForm" (ngSubmit)="registerUser(userData.value)">
+         <div *ngIf="success" class="alert alert-success">{{ success }}</div>
+         <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
          <div class="row">
             <div class="col-12">
                <div class="form-group">
