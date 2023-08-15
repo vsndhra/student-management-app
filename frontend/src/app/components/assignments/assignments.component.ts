@@ -28,6 +28,7 @@ export class AssignmentsComponent {
     this.userService.getAssignment().subscribe(response => {
         console.log(response);
         this.assignments = response.assignments; 
+        this.loader = false
         console.log(this.assignments)
         },
         error => {
