@@ -13,6 +13,7 @@ export class AssignmentsComponent {
   isLoggedIn: boolean = false;
   selectedContent: string = 'listAssignment'; // Set default content
   assignments: any[] = [];  // Initialize the assignments array
+  count: number = 0;
   loader: boolean = true;
   add_success: string ='';
   add_error: string = '';
@@ -28,6 +29,7 @@ export class AssignmentsComponent {
     this.userService.getAssignment().subscribe(response => {
         console.log(response);
         this.assignments = response.assignments; 
+        this.count = this.assignments.length;
         this.loader = false;
         console.log(this.assignments)
         },
