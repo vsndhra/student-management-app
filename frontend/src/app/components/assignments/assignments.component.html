@@ -45,9 +45,7 @@
             </td>
            </tr>
          </tbody>
-       <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
-       <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
-       <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
+       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
       </table>
    </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'addAssignment'">
