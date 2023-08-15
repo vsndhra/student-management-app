@@ -10,7 +10,6 @@
       </div>
    </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'listAssignment'">
-       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
        <table class="table">
          <thead>
            <tr>
@@ -22,6 +21,7 @@
              <th scope="col"> Actions</th>
            </tr>
          </thead>
+       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
        <tbody>
            <tr *ngFor="let assignment of assignments; let i = index">
             <th scope="row"> {{ i + 1 }} </th>
