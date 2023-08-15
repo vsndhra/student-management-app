@@ -10,7 +10,6 @@
       </div>
    </div>
    <div class="container-fluid" *ngIf="selectedContent === 'listAssignment'">
-       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
        <table class="table">
          <thead>
            <tr>
@@ -47,6 +46,7 @@
            </tr>
          </tbody>
       </table>
+       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
    </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'addAssignment'">
       <div class="my-5 col-xl-4 col-md-6 col-12">
