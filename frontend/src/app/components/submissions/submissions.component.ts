@@ -15,6 +15,7 @@ export class SubmissionsComponent {
   userName: string = '';
   role: string = '';
   submissions: any[] = []; // Initialize the submissions array
+  loader: boolean = true;
 
   constructor(
     private autheticationService: AuthenticationService,
@@ -34,7 +35,8 @@ export class SubmissionsComponent {
       .subscribe(
           response => {
             console.log(response);
-            this.submissions = response.assignments; 
+            this.submissions = response.submissions; 
+            this.loader = false;
             console.log(this.submissions)
           },
           error => {

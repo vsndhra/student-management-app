@@ -47,7 +47,6 @@ export class UserService {
   }
 
   getAssignment(): Observable<any> {
-
     return this.http.get<any>(this.getAssignmentAPI, this.httpOptions);
   }
 

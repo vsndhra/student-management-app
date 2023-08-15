@@ -28,13 +28,14 @@ export class AssignmentsComponent {
     this.userService.getAssignment().subscribe(response => {
         console.log(response);
         this.assignments = response.assignments; 
-        this.loader = false
+        this.loader = false;
         console.log(this.assignments)
         },
         error => {
           console.error('Error getting assignment:', error);
         }
-    );}
+    );
+  }
 
   onContentSelected(contentId: string) {
     this.selectedContent = contentId;

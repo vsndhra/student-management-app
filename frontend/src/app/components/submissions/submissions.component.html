@@ -6,7 +6,7 @@
          </div>
       </div>
    </div>
-   <div class="container-fluid d-flex justify-content-center align-items-center">
+   <div class="container-fluid">
       <table class="table">
          <thead>
            <tr>
@@ -38,5 +38,6 @@
            </tr>
          </tbody>
        </table>
+       <ngx-skeleton-loader class="custom-skeleton" count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
    </div>
 </div>
