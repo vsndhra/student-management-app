@@ -10,7 +10,8 @@
       </div>
    </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'listAssignment'">
-      <table class="table">
+       <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
+       <table class="table">
          <thead>
            <tr>
              <th scope="col">S.No</th>
@@ -45,9 +46,8 @@
             </td>
            </tr>
          </tbody>
-       <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader>
       </table>
-      </div>
+   </div>
    <div class="container-fluid d-flex justify-content-center align-items-center" *ngIf="selectedContent === 'addAssignment'">
       <div class="my-5 col-xl-4 col-md-6 col-12">
          <form #assignmentData="ngForm" (ngSubmit)="addAssignment(assignmentData.value)"> 
