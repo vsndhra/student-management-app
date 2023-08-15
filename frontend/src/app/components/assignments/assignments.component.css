@@ -76,7 +76,12 @@ input:checked + .slider:before {
   width: 100%;
 }
 
-img {
+image-container {
   width: 100%;
   height: auto;
+}
+
+.image-container img {
+  width: 200px; /* Set the desired width */
+  height: auto; /* Let the height adjust proportionally */
 }
